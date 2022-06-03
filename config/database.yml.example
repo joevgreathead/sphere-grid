@@ -1,6 +1,0 @@
-development:
-  username: sphere_grid
-  adapter: mysql2
-  database: sphere_grid
-  pool: 5
-  socket: /tmp/mysql.sock
