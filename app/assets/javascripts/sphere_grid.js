@@ -61,14 +61,19 @@ $(document).ready(function () {
   }
 
   function drawNode(node) {
-    var circle = CANVAS.circle(node.x, node.y, 13);
+    const diameter = 13;
     _.each(node.connections, function (connection) {
       drawConnection(node.x, node.y, connection[0], connection[1]);
     });
-    if (node.attribute_name) drawStatNode(circle, node);
-    else if (node.ability) drawAbilityNode(circle, node);
-    else if (node.lock_level) drawLockNode(circle, node);
-    else drawEmptyNode(circle, node);
+    if (node.attribute_name) {
+      drawStatNode(CANVAS.circle(node.x, node.y, diameter), node);
+    } else if (node.ability) {
+      drawAbilityNode(CANVAS.circle(node.x, node.y, diameter), node);
+    } else if (node.lock_level) {
+      drawLockNode(CANVAS.circle(node.x, node.y, diameter), node);
+    } else {
+      drawEmptyNode(CANVAS.circle(node.x, node.y, 5), node);
+    }
   }
 
   function recordCharacters() {
@@ -85,7 +90,7 @@ $(document).ready(function () {
   }
 
   function drawEmptyNode(circle, node) {
-    circle.attr({ fill: "silver" }).mouseover(function () {
+    circle.attr({ fill: "white" }).mouseover(function () {
       showNodePanel(node);
     });
   }
@@ -104,13 +109,20 @@ $(document).ready(function () {
       node.x,
       node.y - 4,
       ATTRIBUTE_ABBREVIATIONS[node.attribute_name]
-    ).attr("font-size", 8);
+    )
+      .attr("font-size", 8)
+      .click(function () {
+        toggleCharacterActivation(node);
+      });
     var valueFontSize = node.attribute_name == "HP" ? 10 : 12;
-    CANVAS.text(node.x, node.y + 5, node.value).attr(
-      "font-size",
-      valueFontSize
-    );
-    if (characterHasActivated(node)) addCharacterActivation(node);
+    CANVAS.text(node.x, node.y + 5, node.value)
+      .attr("font-size", valueFontSize)
+      .click(function () {
+        toggleCharacterActivation(node);
+      });
+    if (characterHasActivated(node)) {
+      addCharacterActivation(node);
+    }
   }
 
   function drawAbilityNode(circle, node) {
@@ -125,22 +137,38 @@ $(document).ready(function () {
       });
     if (_.contains(node.ability.name, " ")) {
       var abilityWords = node.ability.name.split(" ");
-      CANVAS.text(node.x, node.y - 4, abilityWords[0]).attr("font-size", 6);
-      CANVAS.text(node.x, node.y + 4, abilityWords[1]).attr("font-size", 6);
-    } else CANVAS.text(node.x, node.y, node.ability.name).attr("font-size", 6);
-    if (characterHasActivated(node)) addCharacterActivation(node);
+      CANVAS.text(node.x, node.y - 4, abilityWords[0])
+        .attr("font-size", 6)
+        .click(function () {
+          toggleCharacterActivation(node);
+        });
+      CANVAS.text(node.x, node.y + 4, abilityWords[1])
+        .attr("font-size", 6)
+        .click(function () {
+          toggleCharacterActivation(node);
+        });
+    } else {
+      CANVAS.text(node.x, node.y, node.ability.name)
+        .attr("font-size", 6)
+        .click(function () {
+          toggleCharacterActivation(node);
+        });
+    }
+    if (characterHasActivated(node)) {
+      addCharacterActivation(node);
+    }
   }
 
   function drawLockNode(circle, node) {
-    circle.attr({ fill: "black" }).mouseover(function () {
+    circle.attr({ fill: "#2d3436" }).mouseover(function () {
       showNodePanel(node);
     });
     CANVAS.text(node.x, node.y - 5, "LV.").attr({
-      fill: "red",
+      fill: "white",
       "font-size": 8,
     });
     CANVAS.text(node.x, node.y + 5, node.lock_level).attr({
-      fill: "red",
+      fill: "white",
       "font-size": 12,
     });
   }

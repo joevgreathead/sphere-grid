@@ -661,7 +661,7 @@ Node.create! x: 970, y: 478, attribute_name: 'Agility', value: 4, connections: [
 Node.create! x: 874, y: 385, connections: [node(568)]
 Node.create! x: 802, y: 385, attribute_name: 'MP', value: 20, connections: [node(569)]
 Node.create! x: 766, y: 385, connections: [node(570)]
-Node.create! x: 730, y: 385, attribute_name: 'Defense', value: 2, connections: [node(571)]
+Node.create! x: 730, y: 385, attribute_name: 'Defense', value: 2, connections: [node(571), node(468)]
 Node.create! x: 774, y: 412, connections: [node(571)]
 Node.create! x: 828, y: 412, connections: [node(573)]
 Node.create! x: 854, y: 438, connections: [node(574)]

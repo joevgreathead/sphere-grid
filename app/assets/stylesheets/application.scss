@@ -7,7 +7,7 @@
 body{
   background: black;
   #sphere-grid.container{
-    background: lightgrey;
+    background: darkslategray;
     margin: 0 auto;
     width: 1732px;
     height: 2304px;
@@ -41,4 +41,11 @@ body{
       }
     }
   }
+}
+
+circle {
+  cursor: pointer;
+}
+text {
+  cursor: pointer;
 }
