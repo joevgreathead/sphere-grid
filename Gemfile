@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
+ruby "3.1.2"
+
 gem 'coffee-rails'
-gem 'devise'
 gem 'haml'
 gem 'haml-rails'
 gem 'jquery-rails'
@@ -17,3 +18,5 @@ gem 'puma'
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
 end
+
+gem "mini_racer", "~> 0.6.2"
