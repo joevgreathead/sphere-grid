@@ -7,5 +7,6 @@ An updated fork of the outdated [sphere-grid](https://github.com/dfaulken/sphere
 ```bash
 rake db:migrate
 rake db:seed
+bundle install
 bin/rails s
 ```
